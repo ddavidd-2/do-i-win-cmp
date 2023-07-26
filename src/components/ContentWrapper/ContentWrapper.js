@@ -12,8 +12,6 @@ function ContentWrapper({ children }) {
 const Wrapper = styled.div`
   max-width: 760px;
   padding: 0 20px;
-  background-color: lightgreen;
-  height: calc(100% - 60px);
 `;
 
 export default ContentWrapper;

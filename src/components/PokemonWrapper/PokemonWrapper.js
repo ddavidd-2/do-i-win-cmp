@@ -1,32 +1,49 @@
 'use client';
 import React from 'react';
 import { styled } from 'styled-components';
-import PokeCard from '../PokeCard/PokeCard';
+import PokeCard from '../PokeCard';
 import usePokemon from '@/hooks/usePokemon';
+import CMPWinner from '../CMPWinner';
 
 function PokemonWrapper({ pokedex, multipliers }) {
 
   const [pokemonOne, dispatchOne] = usePokemon();
+  const [statsOne, setStatsOne] = React.useState({});
+
   const [pokemonTwo, dispatchTwo] = usePokemon(); 
+  const [statsTwo, setStatsTwo] = React.useState({});
 
   return (
     <Wrapper>
       <Info>Select two Pok&#233;mon in the calculator to see which pokemon wins in a CMP tie.</Info>
-      {JSON.stringify(pokemonOne)}
       <CardLayout>
         <PokeCard
           pokemon={pokemonOne}
           dispatch={dispatchOne}
+          stats={statsOne}
+          setStats={setStatsOne}
           pokedex={pokedex}
           multipliers={multipliers}
         />
         <PokeCard
           pokemon={pokemonTwo}
           dispatch={dispatchTwo}
+          stats={statsTwo}
+          setStats={setStatsTwo}
           pokedex={pokedex}
           multipliers={multipliers}
         />
       </CardLayout>
+      {(!!statsOne.atk && !!statsTwo.atk) &&
+      <Result>
+        <CMPWinner
+          pokemonOne={pokemonOne}
+          attackOne={statsOne.atk}
+          pokemonTwo={pokemonTwo}
+          attackTwo={statsTwo.atk}
+        />
+      </Result>
+      }
     </Wrapper>
   );
 }
@@ -44,5 +61,12 @@ const CardLayout = styled.div`
 const Info = styled.p`
   grid-column: -1 / 1;
 `
+
+const Result = styled.div`
+  grid-column: -1 / 1;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+`;
 
 export default PokemonWrapper;

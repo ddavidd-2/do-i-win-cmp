@@ -4,9 +4,10 @@ import { styled } from 'styled-components';
 import StatSection from '../StatSection';
 import PokemonSearch from '../PokemonSearch/PokemonSearch';
 
-function PokeCard({ pokemon, dispatch, pokedex, multipliers }) {
+function PokeCard({ pokemon, dispatch, pokedex, stats, setStats, multipliers }) {
 
   const [isPokemonChosen, setIsPokemonChosen] = React.useState(false);
+  const [pokedexEntry, setPokedexEntry] = React.useState({});
 
   function handleAttack(event) {
     const input = Number(event.target.value);
@@ -32,23 +33,33 @@ function PokeCard({ pokemon, dispatch, pokedex, multipliers }) {
     dispatch({ type: "stamina", value: input });
   }
 
-  function handleSelect(event) {
-    dispatch({ type: "name", value: event.target.value })
+  function handleName(event) {
+    dispatch({ type: "name", value: event.target.value });
     setIsPokemonChosen(true);
   }
+
+  function handleForm(event) {
+    dispatch({ type: "form", value: event.target.value });
+  }
+
+
   return (
     <Wrapper>
       <Form>
         <PokemonSearch
           pokedex={pokedex}
           inputState={pokemon.displayName}
-          inputHandler={handleSelect}
+          inputHandler={handleName}
+          setPokedexEntry={setPokedexEntry}
         />
         {isPokemonChosen &&
           <>
             <FormSection>
-              <label htmlFor="atkIV">Atk IV: </label>
-              <input
+              <label htmlFor="form"></label>
+            </FormSection>
+            <IVSection>
+              <div>IVs:{" "}</div>
+              <IVInput
                 id="atkIV"
                 name="atkIV"
                 type="number"
@@ -57,10 +68,8 @@ function PokeCard({ pokemon, dispatch, pokedex, multipliers }) {
                 value={pokemon.atkIV}
                 onChange={handleAttack}
               />
-            </FormSection>
-            <FormSection>
-              <label htmlFor="defIV">Def IV: </label>
-              <input
+              /
+              <IVInput
                 id="defIV"
                 name="defIV"
                 type="number"
@@ -69,10 +78,8 @@ function PokeCard({ pokemon, dispatch, pokedex, multipliers }) {
                 value={pokemon.defIV}
                 onChange={handleDefense}
               />
-            </FormSection>
-            <FormSection>
-              <label htmlFor="staIV">HP IV: </label>
-              <input
+              /
+              <IVInput
                 id="staIV"
                 name="staIV"
                 type="number"
@@ -81,38 +88,58 @@ function PokeCard({ pokemon, dispatch, pokedex, multipliers }) {
                 value={pokemon.staIV}
                 onChange={handleStamina}
               />
-            </FormSection>
+            </IVSection>
           </>
         }
       </Form>
-      <StatSection
-        name={pokemon.name}
-        form={pokemon.form}
-        atkIV={pokemon.atkIV}
-        defIV={pokemon.defIV}
-        staIV={pokemon.staIV}
-        pokedex={pokedex}
-        multipliers={multipliers}
-      />
+      {isPokemonChosen &&
+        <StatSection
+          pokemon={pokemon}
+          stats={stats}
+          entry={pokedexEntry}
+          setStats={setStats}
+          pokedex={pokedex}
+          multipliers={multipliers}
+        />
+      }
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
-  width: 50%;
-  padding: 15px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5%;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  min-width: 200px;
+  width: fit-content;
 `;
+
+const IVSection = styled.div`
+  display: flex;
+`
 
 const FormSection = styled.div`
 
 `;
 
+const IVInput = styled.input`
+  display: inline;
+  background-color: transparent;
+  border: none;
+  width: 2rem;
+  border-bottom: 1px solid black;
+
+  &:focus {
+    outline: none;
+    border-bottom: 2px solid red;
+  }
+`
 
 
 export default PokeCard;

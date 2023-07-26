@@ -2,7 +2,13 @@
 import React from 'react';
 import { styled } from 'styled-components';
 
-function PokemonSearch({ pokedex, inputHandler, inputState }) {
+function PokemonSearch({ pokedex, inputHandler, inputState, setPokedexEntry }) {
+
+  function handleSelect(event) {
+    inputHandler(event);
+    const entry = pokedex.find(p => p.pokemon_name === event.target.value && p.form === "Normal");
+    setPokedexEntry(entry);
+  } 
 
   return (
     <Wrapper>
@@ -11,7 +17,7 @@ function PokemonSearch({ pokedex, inputHandler, inputState }) {
         type="xt"
         id="pokemon-name"
         value={inputState}
-        onChange={inputHandler}
+        onChange={handleSelect}
         autoCapitalize="on"
       >
         {pokedex.filter(p => p.form === 'Normal').map(p =>{
@@ -48,7 +54,6 @@ const Select = styled.select`
 `;
 
 const Option = styled.option`
-
 
 `;
 

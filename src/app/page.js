@@ -31,14 +31,13 @@ export default async function Home() {
   return (
     <ContentWrapper>
       <h3>A Pok&#233;mon GO CMP Tie Calculator</h3>
-      <p><BoldWrap>Do I Win CMP?</BoldWrap> is an open source Pok&#233;mon GO calculator that can help you
-        determine who your Pok&#233;mon wins and loses against in a CMP Tie.</p>
+      <p><BoldWrap>Do I Win CMP?</BoldWrap> is an open source Pok&#233;mon GO calculator that 
+        determines who your Pok&#233;mon wins and loses against in CMP.</p>
       <details>
-        <summary>What is a Charge Move Priority &#40;CMP&#41; Tie?</summary>
-        <p>A CMP tie occurs when both player use their Charge Move on the same turn.
-          The game uses each Pok&#233;mon's attack stat to determine which Charge Move gets priority and goes first</p>
+        <summary>What is Charge Move Priority &#40;CMP&#41;?</summary>
+        <p>CMP occurs when both player use their Charge Move on the same turn.
+          The game calculates each Pok&#233;mon's attack stat to determine which Charge Move gets priority and goes first</p>
       </details>
-      <br />
       <PokemonWrapper pokedex={pokedex} multipliers={multipliers} />
     </ContentWrapper>
   )
