@@ -1,8 +1,9 @@
 'use client';
 import React from 'react';
 import { styled } from 'styled-components';
+import pokedex from '../../../public/rawPokemonStats';
 
-function PokemonSearch({ pokedex, inputHandler, inputState, setPokedexEntry }) {
+function PokemonSearch({ inputHandler, inputState, setPokedexEntry }) {
 
   function handleSelect(event) {
     inputHandler(event);

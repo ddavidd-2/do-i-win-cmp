@@ -3,8 +3,10 @@ import React from 'react';
 import { styled } from 'styled-components';
 import StatSection from '../StatSection';
 import PokemonSearch from '../PokemonSearch/PokemonSearch';
+import pokedex from '../../../public/rawPokemonStats.json';
+import multipliers from '../../../public/cpm.json';
 
-function PokeCard({ pokemon, dispatch, pokedex, stats, setStats, multipliers }) {
+function PokeCard({ pokemon, dispatch, stats, setStats }) {
 
   const [isPokemonChosen, setIsPokemonChosen] = React.useState(false);
   const [pokedexEntry, setPokedexEntry] = React.useState({});
@@ -47,7 +49,6 @@ function PokeCard({ pokemon, dispatch, pokedex, stats, setStats, multipliers }) 
     <Wrapper>
       <Form>
         <PokemonSearch
-          pokedex={pokedex}
           inputState={pokemon.displayName}
           inputHandler={handleName}
           setPokedexEntry={setPokedexEntry}
@@ -98,8 +99,6 @@ function PokeCard({ pokemon, dispatch, pokedex, stats, setStats, multipliers }) 
           stats={stats}
           entry={pokedexEntry}
           setStats={setStats}
-          pokedex={pokedex}
-          multipliers={multipliers}
         />
       }
     </Wrapper>
