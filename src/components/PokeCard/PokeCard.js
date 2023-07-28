@@ -2,9 +2,9 @@
 import React from 'react';
 import { styled } from 'styled-components';
 import StatSection from '../StatSection';
-import PokemonSearch from '../PokemonSearch/PokemonSearch';
-import pokedex from '../../../public/rawPokemonStats.json';
-import multipliers from '../../../public/cpm.json';
+import PokemonSearch from '../PokemonSearch';
+import FormSelector from '../FormSelector';
+import { CornerDownRight } from 'react-feather';
 
 function PokeCard({ pokemon, dispatch, stats, setStats }) {
 
@@ -49,15 +49,27 @@ function PokeCard({ pokemon, dispatch, stats, setStats }) {
     <Wrapper>
       <Form>
         <PokemonSearch
-          inputState={pokemon.displayName}
+          pokemon={pokemon}
           inputHandler={handleName}
           setPokedexEntry={setPokedexEntry}
         />
         {isPokemonChosen &&
-          <>
-            <FormSection>
-              <label htmlFor="form"></label>
-            </FormSection>
+        <FormSelect>
+          <CornerDownRight
+            color="black"
+            size={14}
+          />
+          <FormSelector
+            pokemon={pokemon}
+            formHandler={handleForm}
+            setPokedexEntry={setPokedexEntry}
+          />
+        </FormSelect>
+        }
+      </Form>
+      {isPokemonChosen &&
+        <CustomizationWrapper>
+          <Form>
             <IVSection>
               <div>IVs:{" "}</div>
               <IVInput
@@ -90,16 +102,14 @@ function PokeCard({ pokemon, dispatch, stats, setStats }) {
                 onChange={handleStamina}
               />
             </IVSection>
-          </>
-        }
-      </Form>
-      {isPokemonChosen &&
-        <StatSection
-          pokemon={pokemon}
-          stats={stats}
-          entry={pokedexEntry}
-          setStats={setStats}
-        />
+          </Form>
+          <StatSection
+            pokemon={pokemon}
+            stats={stats}
+            entry={pokedexEntry}
+            setStats={setStats}
+          />
+        </CustomizationWrapper>
       }
     </Wrapper>
   );
@@ -107,24 +117,32 @@ function PokeCard({ pokemon, dispatch, stats, setStats }) {
 
 const Wrapper = styled.div`
   padding: 10px;
-  border: 1px solid black;
-  border-radius: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 180px;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-width: 200px;
-  width: fit-content;
+`;
+
+const FormSelect = styled.div`
+  padding-left: 10px;
+`
+
+const CustomizationWrapper = styled.div`
+  background-color: var(--color-primary-white);
+  border-radius: 15px;
+  margin-top: 30px;
+  padding: 8px;
+  width: 180px;
 `;
 
 const IVSection = styled.div`
   display: flex;
-`
-
-const FormSection = styled.div`
-
 `;
 
 const IVInput = styled.input`
@@ -139,6 +157,5 @@ const IVInput = styled.input`
     border-bottom: 2px solid red;
   }
 `
-
 
 export default PokeCard;

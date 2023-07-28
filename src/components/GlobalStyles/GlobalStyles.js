@@ -22,7 +22,15 @@ const GlobalStyle = createGlobalStyle`
     width: fit-content;
   }
 
-`
 
+
+  html {
+
+
+
+    --color-primary-white: hsl(360deg, 0%, 95%);
+  }
+
+`;
 
 export default GlobalStyles;

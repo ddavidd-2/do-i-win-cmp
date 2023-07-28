@@ -3,59 +3,52 @@ import React from 'react';
 import { styled } from 'styled-components';
 import pokedex from '../../../public/rawPokemonStats';
 
-function PokemonSearch({ inputHandler, inputState, setPokedexEntry }) {
+function PokemonSearch({ inputHandler, pokemon, setPokedexEntry }) {
 
   function handleSelect(event) {
     inputHandler(event);
     const entry = pokedex.find(p => p.pokemon_name === event.target.value && p.form === "Normal");
     setPokedexEntry(entry);
-  } 
+  }
 
   return (
-    <Wrapper>
-      <Label htmlFor="pokemon-name">Pokemon:</Label>
-      <Select
-        type="xt"
-        id="pokemon-name"
-        value={inputState}
-        onChange={handleSelect}
-        autoCapitalize="on"
-      >
-        {pokedex.filter(p => p.form === 'Normal').map(p =>{
-          let display = `${p.pokemon_name}`;
-          if (p.form !== 'Normal') {
-            display += ` (${p.form})`;
-          }
-
-          return (
-            <Option 
-              key={display} 
-              value={p.pokemon_name}
-              label={display}
-            />
-          );
-        })}
-      </Select>
-    </Wrapper>
+    <Select
+      id="pokemon-name"
+      defaultValue="Select a Pokemon"
+      onChange={handleSelect}
+    >
+      <option
+        value="Select a Pokemon"
+        label="Select a Pokemon"
+        disabled
+      />
+      {pokedex.filter(p => p.form === 'Normal').map(p => {
+        let display = `${p.pokemon_name}`;
+        if (p.form !== 'Normal') {
+          display += ` (${p.form})`;
+        }
+        return (
+          <option
+            key={display}
+            value={p.pokemon_name}
+            label={display}
+          />
+        );
+      })}
+    </Select>
   );
 }
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-`;
-
-const Label = styled.label`
-
-`;
-
 const Select = styled.select`
+  font-size: 1.2rem;
+  border: 1px solid black;
+  border-radius: 30px;
+  padding: 2px 4px;
+  background-color: var(--color-primary-white);
 
-`;
-
-const Option = styled.option`
-
+  &:hover {
+    box-shadow: 1px 2px 4px 0px gray;
+  }
 `;
 
 export default PokemonSearch;

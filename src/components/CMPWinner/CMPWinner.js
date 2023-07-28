@@ -13,7 +13,7 @@ function CMPWinner({ pokemonOne, attackOne, pokemonTwo, attackTwo }) {
         {nameOne} wins CMP over {nameTwo}
       </div>
     )
-  } else if (attackOne > attackTwo) {
+  } else if (attackOne < attackTwo) {
     return (
       <div>
         {nameOne} loses CMP to {nameTwo}
@@ -26,9 +26,6 @@ function CMPWinner({ pokemonOne, attackOne, pokemonTwo, attackTwo }) {
       </div>
     )
   }
-
-
-  return <div></div>;
 }
 
 export default CMPWinner;
