@@ -26,6 +26,7 @@ const Stat = styled.div`
   width: ${p => p.width};
   background-color: gray;
   border-radius: 4px;
+  transition: width 200ms;
 `
 
 export default StatBar;

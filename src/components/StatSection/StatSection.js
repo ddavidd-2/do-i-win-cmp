@@ -22,38 +22,37 @@ function StatSection({ pokemon, stats, setStats, entry }) {
   return (
     <Stats>
       <CombatPower>CP: {stats.cp}</CombatPower>
-      <Stat>
-        <div>Atk: {stats.atk}</div>
-        <StatBar stat={stats.atk} />
-      </Stat>
-      <Stat>
-        <div>Def: {stats.def}</div>
-        <StatBar stat={stats.def} />
-      </Stat>
-      <Stat>
-        <div>HP: {stats.sta}</div>
-        <StatBar stat={stats.sta} />
-      </Stat>
-      <div>Total Stat Product: {stats.sp}</div>
+      <StatLabel>atk:</StatLabel>
+      <div>{stats.atk}</div>
+      <StatBar stat={stats.atk} />
+      <StatLabel>def:</StatLabel>
+      <div>{stats.def}</div>
+      <StatBar stat={stats.def} />
+      <StatLabel>hp:</StatLabel>
+      <div>{stats.sta}</div>
+      <StatBar stat={stats.sta} />
     </Stats>
   )
 
 }
 
 const Stats = styled.div`
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 35px 60px 1fr; 
+  grid-template-rows: 30px repeat(3, 1fr);
   align-items: center;
 `;
 
 const CombatPower = styled.div`
   margin-bottom: 10px;
+  grid-column: 1 / -1;
+  grid-row: 1; 
+  justify-self: center;
 `
 
-const Stat = styled.div`
-  display: grid;
-  grid-template-columns: 95px 1fr;
+const StatLabel = styled.div`
+  font-size: var(--font-small);
 `
 
 export default StatSection;

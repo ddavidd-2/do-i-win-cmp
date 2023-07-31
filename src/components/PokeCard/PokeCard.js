@@ -59,6 +59,7 @@ function PokeCard({ pokemon, dispatch, stats, setStats }) {
             color="black"
             size={14}
           />
+          Form: 
           <FormSelector
             pokemon={pokemon}
             formHandler={handleForm}
@@ -136,7 +137,7 @@ const FormSelect = styled.div`
 const CustomizationWrapper = styled.div`
   background-color: var(--color-primary-white);
   border-radius: 15px;
-  margin-top: 30px;
+  margin-top: 10px;
   padding: 8px;
   width: 180px;
 `;

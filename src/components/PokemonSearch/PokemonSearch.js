@@ -48,6 +48,7 @@ const Select = styled.select`
 
   &:hover {
     box-shadow: 1px 2px 4px 0px gray;
+    background-color: var(--color-primary-white-hover);
   }
 `;
 
