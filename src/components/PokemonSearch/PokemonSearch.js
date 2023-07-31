@@ -3,12 +3,13 @@ import React from 'react';
 import { styled } from 'styled-components';
 import pokedex from '../../../public/rawPokemonStats';
 
-function PokemonSearch({ inputHandler, pokemon, setPokedexEntry }) {
+function PokemonSearch({ inputHandler, setPokedexEntry, setBestIVs }) {
 
   function handleSelect(event) {
     inputHandler(event);
     const entry = pokedex.find(p => p.pokemon_name === event.target.value && p.form === "Normal");
     setPokedexEntry(entry);
+    setBestIVs(entry);
   }
 
   return (

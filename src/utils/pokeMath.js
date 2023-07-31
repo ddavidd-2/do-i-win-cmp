@@ -28,6 +28,10 @@ export function calculateIVs(pkm, cpMultipliers) {
   return ivTable;
 }
 
+export function getBestIVs(entry, multipliers) {
+  return calculateIVs(entry, multipliers)[0];
+}
+
 // Returns the stats for highest level for a specific iv set under 1500 
 export function getBestLevel(atkBase, atkIV, defBase, defIV, staBase, staIV, cpMultipliers) {
   let bestLevelStats = undefined;

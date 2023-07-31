@@ -5,11 +5,20 @@ import StatSection from '../StatSection';
 import PokemonSearch from '../PokemonSearch';
 import FormSelector from '../FormSelector';
 import { CornerDownRight } from 'react-feather';
+import { getBestIVs } from '@/utils/pokeMath';
+import multipliers from '../../../public/cpm.json';
 
 function PokeCard({ pokemon, dispatch, stats, setStats }) {
 
   const [isPokemonChosen, setIsPokemonChosen] = React.useState(false);
   const [pokedexEntry, setPokedexEntry] = React.useState({});
+
+  function setBestIVs(entry) {
+    const ivs = getBestIVs(entry, multipliers);
+    dispatch({ type: "attack", value: ivs.atkIV });
+    dispatch({ type: "defense", value: ivs.defIV });
+    dispatch({ type: "stamina", value: ivs.staIV });
+  }
 
   function handleAttack(event) {
     const input = Number(event.target.value);
@@ -37,6 +46,7 @@ function PokeCard({ pokemon, dispatch, stats, setStats }) {
 
   function handleName(event) {
     dispatch({ type: "name", value: event.target.value });
+    dispatch({ type: "form", value: "Normal" });
     setIsPokemonChosen(true);
   }
 
@@ -49,9 +59,9 @@ function PokeCard({ pokemon, dispatch, stats, setStats }) {
     <Wrapper>
       <Form>
         <PokemonSearch
-          pokemon={pokemon}
           inputHandler={handleName}
           setPokedexEntry={setPokedexEntry}
+          setBestIVs={setBestIVs}
         />
         {isPokemonChosen &&
         <FormSelect>
@@ -64,6 +74,7 @@ function PokeCard({ pokemon, dispatch, stats, setStats }) {
             pokemon={pokemon}
             formHandler={handleForm}
             setPokedexEntry={setPokedexEntry}
+            setBestIVs={setBestIVs}
           />
         </FormSelect>
         }
