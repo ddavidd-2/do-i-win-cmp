@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { styled } from 'styled-components';
-import pokedex from '../../../public/rawPokemonStats';
+import pokedex from '../../../public/pokedex';
 
 function PokemonSearch({ inputHandler, setPokedexEntry, setBestIVs }) {
 

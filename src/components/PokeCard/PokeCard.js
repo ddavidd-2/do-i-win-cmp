@@ -5,8 +5,6 @@ import StatSection from '../StatSection';
 import PokemonSearch from '../PokemonSearch';
 import FormSelector from '../FormSelector';
 import { CornerDownRight } from 'react-feather';
-import { getBestIVs } from '@/utils/pokeMath';
-import multipliers from '../../../public/cpm.json';
 
 function PokeCard({ pokemon, dispatch, stats, setStats }) {
 
@@ -14,10 +12,9 @@ function PokeCard({ pokemon, dispatch, stats, setStats }) {
   const [pokedexEntry, setPokedexEntry] = React.useState({});
 
   function setBestIVs(entry) {
-    const ivs = getBestIVs(entry, multipliers);
-    dispatch({ type: "attack", value: ivs.atkIV });
-    dispatch({ type: "defense", value: ivs.defIV });
-    dispatch({ type: "stamina", value: ivs.staIV });
+    dispatch({ type: "attack", value: entry.bestIVs.atk });
+    dispatch({ type: "defense", value: entry.bestIVs.def });
+    dispatch({ type: "stamina", value: entry.bestIVs.sta });
   }
 
   function handleAttack(event) {

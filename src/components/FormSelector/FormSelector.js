@@ -1,14 +1,15 @@
 'use client';
 import React from 'react';
 import { styled } from 'styled-components';
-import pokedex from '../../../public/rawPokemonStats';
+import pokedex from '../../../public/pokedex';
 
-function FormSelector({ pokemon, formHandler, setPokedexEntry }) {
+function FormSelector({ pokemon, formHandler, setPokedexEntry, setBestIVs }) {
 
   function handleSelect(event) {
     formHandler(event);
     const entry = pokedex.find(p => p.pokemon_name === pokemon.name && p.form === event.target.value);
     setPokedexEntry(entry);
+    setBestIVs(entry);
   }
 
   return (

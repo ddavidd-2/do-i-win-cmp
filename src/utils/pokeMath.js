@@ -1,13 +1,5 @@
 // get the all IV combinations for a specific pokemon sorted by greatest stat product
-export function getAllIVs(pokemonName, form, multipliers, pokedex) {
-  const pkm = pokedex.find((p) => p.pokemon_name === pokemonName && p.form === form);
-  if (!pkm) {
-    return 'Pokemon Not Found';
-  }
-  return calculateIVs(pkm, multipliers);
-}
-
-export function calculateIVs(pkm, cpMultipliers) {
+export function calculateAllIVs(pkm, cpMultipliers) {
   const MAX_IV = 15;
   const ivTable = [];
 
@@ -23,13 +15,8 @@ export function calculateIVs(pkm, cpMultipliers) {
       }
     }
   }
-
   ivTable.sort((a, b) => b.sp - a.sp);
   return ivTable;
-}
-
-export function getBestIVs(entry, multipliers) {
-  return calculateIVs(entry, multipliers)[0];
 }
 
 // Returns the stats for highest level for a specific iv set under 1500 
@@ -81,8 +68,3 @@ function calcCP(level, atkBase, atkIV, defBase, defIV, staBase, staIV, cpMultipl
   const mult = cpMultipliers[level];
   return Math.floor(atk * Math.pow(def, 0.5) * Math.pow(sta, 0.5) * Math.pow(mult, 2) / 10);
 }
-
-/*
-const multipliers = require('../../data/cpm.json');
-console.log(getBestLevel(198, 1, 189, 12, 190, 13, multipliers));
-*/
