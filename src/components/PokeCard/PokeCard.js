@@ -5,6 +5,7 @@ import StatSection from '../StatSection';
 import PokemonSearch from '../PokemonSearch';
 import FormSelector from '../FormSelector';
 import { CornerDownRight } from 'react-feather';
+import TypeIcon from '../TypeIcon';
 
 function PokeCard({ pokemon, dispatch, stats, setStats }) {
 
@@ -78,6 +79,11 @@ function PokeCard({ pokemon, dispatch, stats, setStats }) {
       </Form>
       {isPokemonChosen &&
         <CustomizationWrapper>
+          <Types>
+            {pokedexEntry.type.map(t => {
+              return <TypeIcon type={t} />
+            })}
+          </Types>
           <Form>
             <IVSection>
               <div>IVs:{" "}</div>
@@ -148,6 +154,9 @@ const CustomizationWrapper = styled.div`
   margin-top: 10px;
   padding: 8px;
   width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `;
 
 const IVSection = styled.div`
@@ -166,5 +175,12 @@ const IVInput = styled.input`
     border-bottom: 2px solid red;
   }
 `
+
+const Types = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+`;
 
 export default PokeCard;

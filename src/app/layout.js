@@ -4,7 +4,7 @@ import StyledComponentsRegistry from '@/components/StyledComponentsRegistry'
 import MainWrapper from '@/components/MainWrapper'
 import Header from '@/components/Header'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'], display: 'fallback' })
 
 export default function RootLayout({ children }) {
   return (

@@ -10,12 +10,16 @@ function ContentWrapper({ children }) {
 }
 
 const Wrapper = styled.div`
-  max-width: 760px;
-  padding: 0 20px;
+  max-width: 680px;
+  padding: 0 60px;
   margin-top: 20px;
   border-radius: 8px 8px 0 0 ;
   background-color: var(--color-primary);
   height: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export default ContentWrapper;

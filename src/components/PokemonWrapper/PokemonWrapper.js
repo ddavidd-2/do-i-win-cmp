@@ -51,7 +51,8 @@ const Wrapper = styled.div`
 
 const CardLayout = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0 40px;
 `
 
 const Info = styled.p`

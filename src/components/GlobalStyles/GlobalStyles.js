@@ -13,7 +13,8 @@ const GlobalStyle = createGlobalStyle`
     overflow: hidden;
   }
 
-  details {
+  details > p {
+    max-width: 600px;
   }
 
   h3 {
@@ -34,6 +35,8 @@ const GlobalStyle = createGlobalStyle`
     --color-primary-white: hsl(0deg, 0%, 95%);
     --color-primary-white-hover: hsl(0deg, 0%, 80%);
     --color-gray-80: hsl(0deg, 0%, 80%);
+    --color-gray-40: hsl(0deg, 0%, 40%);
+    --color-gray-20: hsl(0deg, 0%, 20%);
 
     --color-background: white;
     --color-purple-light: hsl(252deg, 30%, 75%);

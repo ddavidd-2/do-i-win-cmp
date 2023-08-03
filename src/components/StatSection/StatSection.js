@@ -37,7 +37,6 @@ function StatSection({ pokemon, stats, setStats, entry }) {
 }
 
 const Stats = styled.div`
-  margin-top: 10px;
   display: grid;
   grid-template-columns: 35px 60px 1fr; 
   grid-template-rows: 30px repeat(3, 1fr);
