@@ -7,28 +7,6 @@ function GlobalStyles() {
 }
 
 const GlobalStyle = createGlobalStyle`
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
-
-  details > p {
-    max-width: 600px;
-
-    @media ${QUERIES.phoneAndSmaller} {
-      max-width: min(360px, 95%);
-    }
-  }
-
-  h3 {
-    margin-left: auto;
-    margin-right: auto;
-    width: fit-content;
-  }
-
-
 
   html {
     /* text sizes */
@@ -66,8 +44,31 @@ const GlobalStyle = createGlobalStyle`
     } */
 
     background-color: var(--color-background);
-
+    font-weight: 400;
+    font-size: 1rem;
   }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  details > p {
+    max-width: 600px;
+
+    @media ${QUERIES.phoneAndSmaller} {
+      max-width: min(360px, 95%);
+    }
+  }
+
+  h3 {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+  }
+
 
 `;
 
