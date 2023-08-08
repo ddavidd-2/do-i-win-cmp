@@ -29,8 +29,7 @@ function PokemonSearch({ inputHandler, setPokedexEntry, setBestIVs }) {
           <option
             key={p.pokemon_name}
             value={p.pokemon_name}
-            label={p.pokemon_name.toString()}
-          />
+          >{p.pokemon_name}</option>
         );
       })}
     </Select>
