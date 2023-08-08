@@ -1,11 +1,13 @@
 'use client';
 import React from 'react';
 import { styled } from 'styled-components';
+import { CornerDownRight } from 'react-feather';
+import { QUERIES } from '@/constants';
 import StatSection from '../StatSection';
 import PokemonSearch from '../PokemonSearch';
 import FormSelector from '../FormSelector';
-import { CornerDownRight } from 'react-feather';
 import TypeIcon from '../TypeIcon';
+import IVInput from '../IVInput';
 
 function PokeCard({ pokemon, dispatch, stats, setStats }) {
 
@@ -81,40 +83,25 @@ function PokeCard({ pokemon, dispatch, stats, setStats }) {
         <CustomizationWrapper>
           <Types>
             {pokedexEntry.type.map(t => {
-              return <TypeIcon type={t} />
+              return <TypeIcon key={t} type={t} />
             })}
           </Types>
           <Form>
             <IVSection>
               <div>IVs:{" "}</div>
               <IVInput
-                id="atkIV"
-                name="atkIV"
-                type="number"
-                min="0"
-                max="15"
-                value={pokemon.atkIV}
-                onChange={handleAttack}
+                stat={pokemon.atkIV}
+                statHandler={handleAttack}
               />
               /
               <IVInput
-                id="defIV"
-                name="defIV"
-                type="number"
-                min="0"
-                max="15"
-                value={pokemon.defIV}
-                onChange={handleDefense}
+                stat={pokemon.defIV}
+                statHandler={handleDefense}
               />
               /
               <IVInput
-                id="staIV"
-                name="staIV"
-                type="number"
-                min="0"
-                max="15"
-                value={pokemon.staIV}
-                onChange={handleStamina}
+                stat={pokemon.staIV}
+                statHandler={handleStamina}
               />
             </IVSection>
           </Form>
@@ -136,6 +123,10 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 180px;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    width: min(180px, 40%);
+  }
 `;
 
 const Form = styled.form`
@@ -153,28 +144,20 @@ const CustomizationWrapper = styled.div`
   border-radius: 15px;
   margin-top: 10px;
   padding: 8px;
-  width: 180px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    width: 110%;
+    font-size: 0.9rem;
+  }
+
 `;
 
 const IVSection = styled.div`
   display: flex;
 `;
-
-const IVInput = styled.input`
-  display: inline;
-  background-color: transparent;
-  border: none;
-  width: 2rem;
-  border-bottom: 1px solid black;
-
-  &:focus {
-    outline: none;
-    border-bottom: 2px solid red;
-  }
-`
 
 const Types = styled.div`
   width: 100%;

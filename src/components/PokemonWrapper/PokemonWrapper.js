@@ -47,16 +47,18 @@ function PokemonWrapper() {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: min(500px, 100%);
 `
 
 const CardLayout = styled.div`
   display: flex;
-  justify-content: space-between;
-  padding: 0 40px;
+  justify-content: space-around;
+  width: 100%;
 `
 
 const Info = styled.p`
-  grid-column: -1 / 1;
+  width: 360px;
 `
 
 const Result = styled.div`

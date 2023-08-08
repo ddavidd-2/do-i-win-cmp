@@ -1,5 +1,6 @@
 'use client';
 import { createGlobalStyle } from "styled-components";
+import { QUERIES } from "@/constants";
 
 function GlobalStyles() {
   return <GlobalStyle />;
@@ -15,6 +16,10 @@ const GlobalStyle = createGlobalStyle`
 
   details > p {
     max-width: 600px;
+
+    @media ${QUERIES.phoneAndSmaller} {
+      max-width: min(360px, 95%);
+    }
   }
 
   h3 {
@@ -40,7 +45,7 @@ const GlobalStyle = createGlobalStyle`
 
     --color-background: white;
     --color-purple-light: hsl(252deg, 30%, 75%);
-    --color-purple-dark: purple;
+    --color-purple-faded: hsl(252deg, 30%, 75%, 0.55);
     --color-header-shadow: hsl(252deg, 30%, 40%, 0.65);
 
     /* cmp result colors */

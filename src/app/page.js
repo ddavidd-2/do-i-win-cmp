@@ -11,8 +11,8 @@ export default async function Home() {
 
   return (
     <ContentWrapper>
-      <h3>A Pok&#233;mon GO CMP Tie Calculator</h3>
-      <p><BoldWrap>Do I Win CMP?</BoldWrap> is an open source Pok&#233;mon GO calculator that 
+      <h3>A Pok&#233;mon GO CMP Calculator</h3>
+      <p><BoldWrap>Do I Win CMP?</BoldWrap> is an Pok&#233;mon GO calculator that 
         determines who your Pok&#233;mon wins and loses against in terms of Charge Move Priority.</p>
       <details>
         <summary>What is Charge Move Priority &#40;CMP&#41;?</summary>

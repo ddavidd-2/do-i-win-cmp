@@ -1,5 +1,6 @@
 'use client';
 import { styled } from "styled-components";
+import { QUERIES } from "@/constants";
 
 function MainWrapper({ children }) {
   return (
@@ -16,6 +17,10 @@ const Wrapper = styled.div`
   align-items: center;
   height: 100%;
   padding-top: var(--header-height);
+
+  @media ${QUERIES.phoneAndSmaller} {
+    background-color: var(--color-purple-faded);
+  }
 `;
 
 export default MainWrapper;

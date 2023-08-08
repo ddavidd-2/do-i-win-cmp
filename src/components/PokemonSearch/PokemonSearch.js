@@ -2,6 +2,7 @@
 import React from 'react';
 import { styled } from 'styled-components';
 import pokedex from '../../../public/pokedex';
+import { QUERIES } from '@/constants';
 
 function PokemonSearch({ inputHandler, setPokedexEntry, setBestIVs }) {
 
@@ -45,11 +46,13 @@ const Select = styled.select`
   border: 1px solid black;
   border-radius: 30px;
   padding: 2px 4px;
-  background-color: var(--color-primary-white);
 
   &:hover {
     box-shadow: 1px 2px 4px 0px gray;
-    background-color: var(--color-primary-white-hover);
+  }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    font-size: 1rem;
   }
 `;
 

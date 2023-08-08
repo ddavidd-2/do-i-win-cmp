@@ -1,14 +1,14 @@
 'use client';
 import { styled } from 'styled-components';
 import React from 'react';
+import { QUERIES } from '@/constants';
 
 /* add max stat breakpoints for UL and ML in the future */
 function StatBar({ stat }) {
-  const width = `${stat / 300 * 85}px`;
 
   return (
     <BarWrapper>
-      <Stat width={width} />
+      <Stat $stat={stat} />
     </BarWrapper>
   )
 }
@@ -23,10 +23,14 @@ const BarWrapper = styled.div`
 const Stat = styled.div`
   display: inline-block;
   height: 5px;
-  width: ${p => p.width};
+  width: ${p => `${p.$stat / 300 * 85}px`};
   background-color: gray;
   border-radius: 4px;
   transition: width 200ms;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    width: ${p => `${p.$stat / 360 * 85}px`};
+  }
 `
 
 export default StatBar;
