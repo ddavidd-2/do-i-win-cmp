@@ -19,8 +19,7 @@ function IVInput({ stat, statHandler }) {
           <option
             key={iv}
             value={iv}
-            label={iv}
-            textContent={iv}
+            label={iv.toString()}
           />
         );
       })}

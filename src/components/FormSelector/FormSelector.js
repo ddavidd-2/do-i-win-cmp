@@ -24,8 +24,7 @@ function FormSelector({ pokemon, formHandler, setPokedexEntry, setBestIVs }) {
             <option
               key={p.form}
               value={p.form}
-              label={p.form}
-              textContent={p.form}
+              label={p.form.toString()}
             />
           )
         })}
