@@ -25,15 +25,12 @@ function PokemonSearch({ inputHandler, setPokedexEntry, setBestIVs }) {
         disabled
       />
       {pokedex.filter(p => p.form === 'Normal').map(p => {
-        let display = `${p.pokemon_name}`;
-        if (p.form !== 'Normal') {
-          display += ` (${p.form})`;
-        }
         return (
           <option
-            key={display}
+            key={p.pokemon_name}
             value={p.pokemon_name}
-            label={display}
+            label={p.pokemon_name}
+            textContent={p.pokemon_name}
           />
         );
       })}

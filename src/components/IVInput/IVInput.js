@@ -20,6 +20,7 @@ function IVInput({ stat, statHandler }) {
             key={iv}
             value={iv}
             label={iv}
+            textContent={iv}
           />
         );
       })}

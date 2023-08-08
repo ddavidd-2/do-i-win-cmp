@@ -29,7 +29,7 @@ const Stat = styled.div`
   transition: width 200ms;
 
   @media ${QUERIES.phoneAndSmaller} {
-    width: ${p => `${p.$stat / 360 * 85}px`};
+    width: ${p => `${p.$stat / 400 * 85}px`};
   }
 `
 
