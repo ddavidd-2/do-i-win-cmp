@@ -14,14 +14,12 @@ function StatBar({ stat }) {
 }
 
 const BarWrapper = styled.div`
-  display: inline-block;
   width: 85px;
   display: flex;
   align-items: center;
 `
 
 const Stat = styled.div`
-  display: inline-block;
   height: 5px;
   width: ${p => `${p.$stat / 300 * 85}px`};
   background-color: gray;
@@ -30,7 +28,9 @@ const Stat = styled.div`
 
   @media ${QUERIES.phoneAndSmaller} {
     width: ${p => `${p.$stat / 400 * 85}px`};
+    max-width: 50px;
   }
+
 `
 
 export default StatBar;

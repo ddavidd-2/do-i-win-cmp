@@ -44,9 +44,9 @@ function PokeCard({ pokemon, dispatch, stats, setStats }) {
     dispatch({ type: "stamina", value: input });
   }
 
-  function handleName(event) {
-    dispatch({ type: "name", value: event.target.value });
-    dispatch({ type: "form", value: "Normal" });
+  function handleName(name, form = "Normal") {
+    dispatch({ type: "name", value: name });
+    dispatch({ type: "form", value: form });
     setIsPokemonChosen(true);
   }
 
@@ -59,7 +59,8 @@ function PokeCard({ pokemon, dispatch, stats, setStats }) {
     <Wrapper>
       <Form>
         <PokemonSearch
-          inputHandler={handleName}
+          pokemon={pokemon}
+          handleName={handleName}
           setPokedexEntry={setPokedexEntry}
           setBestIVs={setBestIVs}
         />

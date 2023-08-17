@@ -6763,6 +6763,54 @@
     }
   },
   {
+    "base_attack": 414,
+    "base_defense": 46,
+    "base_stamina": 137,
+    "form": "Attack",
+    "pokemon_id": 386,
+    "pokemon_name": "Deoxys",
+    "type": [
+      "Psychic"
+    ],
+    "bestIVs": {
+      "atk": 1,
+      "def": 15,
+      "sta": 15 
+    }
+  },
+  {
+    "base_attack": 144,
+    "base_defense": 330,
+    "base_stamina": 137,
+    "form": "Defense",
+    "pokemon_id": 386,
+    "pokemon_name": "Deoxys",
+    "type": [
+      "Psychic"
+    ],
+    "bestIVs": {
+      "atk": 0,
+      "def": 15,
+      "sta": 15
+    }
+  },
+  {
+    "base_attack": 230,
+    "base_defense": 218,
+    "base_stamina": 137,
+    "form": "Speed",
+    "pokemon_id": 386,
+    "pokemon_name": "Deoxys",
+    "type": [
+      "Psychic"
+    ],
+    "bestIVs": {
+      "atk": 0,
+      "def": 14,
+      "sta": 14
+    }
+  },
+  {
     "base_attack": 119,
     "base_defense": 110,
     "base_stamina": 146,

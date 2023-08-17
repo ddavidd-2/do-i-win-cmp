@@ -1,5 +1,16 @@
+const cpm = require('../../public/cpm.json');
+const pokedex = require('../../public/pokedex.json');
+
 // get the all IV combinations for a specific pokemon sorted by greatest stat product
-export function calculateAllIVs(pkm, cpMultipliers) {
+export function getPokemonIVs(name, form, maxLevel = 51) {
+  const pokemon = pokedex.find(p => p.pokemon_name === name && p.form === form);
+  if (!pokemon) {
+    return []
+  }
+  return calculateAllIVs(pokemon, cpm, maxLevel);
+}
+
+export function calculateAllIVs(pkm, cpMultipliers, maxLevel = 51) {
   const MAX_IV = 15;
   const ivTable = [];
 
@@ -10,7 +21,7 @@ export function calculateAllIVs(pkm, cpMultipliers) {
   for (let atkIV = 0; atkIV <= MAX_IV; atkIV++) {
     for (let defIV = 0; defIV <= MAX_IV; defIV++) {
       for (let staIV = 0; staIV <= MAX_IV; staIV++) {
-        const bestLevel = getBestLevel(atkBase, atkIV, defBase, defIV, staBase, staIV, cpMultipliers)
+        const bestLevel = getBestLevel(atkBase, atkIV, defBase, defIV, staBase, staIV, cpMultipliers, maxLevel)
         ivTable.push(bestLevel);
       }
     }
@@ -20,9 +31,9 @@ export function calculateAllIVs(pkm, cpMultipliers) {
 }
 
 // Returns the stats for highest level for a specific iv set under 1500 
-export function getBestLevel(atkBase, atkIV, defBase, defIV, staBase, staIV, cpMultipliers) {
+export function getBestLevel(atkBase, atkIV, defBase, defIV, staBase, staIV, cpMultipliers, maxLevel = 51) {
   let bestLevelStats = undefined;
-  for (let level = 1; level <= 51; level += 0.5) {
+  for (let level = 1; level <= maxLevel; level += 0.5) {
     const stats = calculateStats(atkBase, atkIV, defBase, defIV, staBase, staIV, level, cpMultipliers);
     if (stats.cp <= 1500) {
       bestLevelStats = stats;

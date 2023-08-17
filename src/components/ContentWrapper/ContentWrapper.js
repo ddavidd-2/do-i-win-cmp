@@ -12,12 +12,13 @@ function ContentWrapper({ children }) {
 
 const Wrapper = styled.div`
   max-width: 680px;
+  width: fit-content;
   padding: 0 60px;
   margin: 20px;
   margin-bottom: 0;
-  border-radius: 8px 8px 0 0 ;
+  border-radius: 8px;
   background-color: var(--color-purple-faded);
-  height: 100%;
+  min-height: 650px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -27,6 +28,7 @@ const Wrapper = styled.div`
     max-width: min(360px, 95%);
     margin-top: 0;
     border-radius: 0;
+    height: 100%;
   }
 `;
 

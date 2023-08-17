@@ -1,4 +1,3 @@
-import ContentWrapper from "@/components/ContentWrapper"
 import PokemonWrapper from "@/components/PokemonWrapper"
 import BoldWrap from "@/components/BoldWrap"
 
@@ -10,7 +9,7 @@ export const metadata = {
 export default async function Home() {
 
   return (
-    <ContentWrapper>
+    <>
       <h3>A Pok&#233;mon GO CMP Calculator</h3>
       <p><BoldWrap>Do I Win CMP?</BoldWrap> is an Pok&#233;mon GO calculator that 
         determines who your Pok&#233;mon wins and loses against in terms of Charge Move Priority.</p>
@@ -20,6 +19,6 @@ export default async function Home() {
           The game calculates each Pok&#233;mon&apos;s attack stat to determine which Charge Move gets priority and goes first.</p>
       </details>
       <PokemonWrapper />
-    </ContentWrapper>
+    </>
   )
 }

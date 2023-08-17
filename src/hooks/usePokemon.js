@@ -33,7 +33,7 @@ function reducer(state, action) {
 export default function usePokemon() {
   const [pokemon, dispatch] = React.useReducer(reducer,
     {
-      name: "",
+      name: " ",
       form: "Normal",
       atkIV: 0,
       defIV: 0,

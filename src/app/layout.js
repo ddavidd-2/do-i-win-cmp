@@ -3,6 +3,7 @@ import GlobalStyles from '@/components/GlobalStyles'
 import StyledComponentsRegistry from '@/components/StyledComponentsRegistry'
 import MainWrapper from '@/components/MainWrapper'
 import Header from '@/components/Header'
+import ContentWrapper from '@/components/ContentWrapper'
 
 const inter = Inter({ subsets: ['latin'], display: 'fallback' })
 
@@ -13,7 +14,9 @@ export default function RootLayout({ children }) {
         <StyledComponentsRegistry>
           <Header />
           <MainWrapper>
-            {children}
+            <ContentWrapper>
+              {children}
+            </ContentWrapper>
           </MainWrapper>
           <GlobalStyles />
         </StyledComponentsRegistry>
