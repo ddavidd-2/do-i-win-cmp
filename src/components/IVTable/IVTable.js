@@ -1,4 +1,5 @@
 'use client';
+import { QUERIES } from '@/constants';
 import React from 'react';
 import { styled } from 'styled-components';
 
@@ -9,7 +10,8 @@ function IVTable({ list40, list41, list50, list51 }) {
   const [useBestBuddy, setUseBestBuddy] = React.useState(false);
   const [useXL, setUseXL] = React.useState(false);
   const [currRank, setCurrRank] = React.useState(0);
-  const [rankColor, setRankColor] = React.useState('green');
+  const [rankInput, setRankInput] = React.useState("");
+  const [ivInput, setIvInput] = React.useState("");
 
   let rankings = useXL ?
     useBestBuddy ? list51 : list50
@@ -23,21 +25,9 @@ function IVTable({ list40, list41, list50, list51 }) {
     return relPercent.toFixed(2)
   }
 
-  function handleIVSearch(event) {
-    const ivString = event.target.value;
-    if (ivString.length < 5) {
-      return;
-    }
-  }
-
-  function handleRankSearch(event) {
-    const rank = Number(event.target.value);
+  function updateRank(rank) {
     if (rank < 1 || rank > 4096) {
-      setRankColor('red');
       return;
-    }
-    if (rankColor !== 'green') {
-      setRankColor('green');
     }
     let newStart = rank - 15;
     let newEnd = rank + 15;
@@ -55,8 +45,42 @@ function IVTable({ list40, list41, list50, list51 }) {
     setEnd(newEnd);
   }
 
+  function handleRankSearch(event) {
+    setRankInput(event.target.value);
+    const rank = Number(event.target.value);
+    updateRank(rank);
+  }
+
+  const validIVInput = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '/'];
+
+  function handleIvSearch(event) {
+    const ivStr = event.target.value;
+    const last = ivStr.length - 1;
+    if ((!validIVInput.includes(ivStr[last]) && ivStr.length > 0) || ivStr.length > 8) {
+      return;
+    }
+    setIvInput(ivStr);
+    if (ivStr.length >= 5 || ivStr.length <= 8) {
+      const ivs = ivStr.split('/');
+      if (ivs.length !== 3 || ivs[0].length > 2 || ivs[1].length > 2 || ivs[2].length > 2) {
+        return;
+      }
+      const atk = Number(ivs[0]);
+      const def = Number(ivs[1]);
+      const sta = Number(ivs[2]);
+
+      const rank = rankings.findIndex((pkm) => pkm.atkIV === atk && pkm.defIV === def && pkm.staIV === sta) + 1;
+      updateRank(rank);
+    }
+  }
+
+  function isValidRank(rankStr) {
+    const rank = Number(rankStr);
+    return rank >= 1 && rank <= 4096;
+  }
+
   return (
-    <>
+    <Wrapper>
       <Configurations>
         <Toggles>
           <Setting>
@@ -93,7 +117,8 @@ function IVTable({ list40, list41, list50, list51 }) {
               type="text"
               id="ivSearch"
               name="ivSearch"
-              maxLength="8"
+              value={ivInput}
+              onChange={handleIvSearch}
             />
           </Setting>
           <Setting>
@@ -106,9 +131,9 @@ function IVTable({ list40, list41, list50, list51 }) {
               name="rankSearch"
               min="1"
               max="4096"
-              maxLength="4"
+              value={rankInput}
               onChange={handleRankSearch}
-              color={rankColor} 
+              $valid={isValidRank(rankInput)}
             />
           </Setting>
           <input
@@ -127,8 +152,8 @@ function IVTable({ list40, list41, list50, list51 }) {
             <HeaderElement>Atk</HeaderElement>
             <HeaderElement>Def</HeaderElement>
             <HeaderElement>HP</HeaderElement>
-            <HeaderElement>Stat Product</HeaderElement>
-            <HeaderElement>Relative Product</HeaderElement>
+            <HeaderElement>Total Stat</HeaderElement>
+            <HeaderElement>Rel. Stat</HeaderElement>
           </HeaderRow>
         </TableHeader>
         <TableBody>
@@ -136,8 +161,8 @@ function IVTable({ list40, list41, list50, list51 }) {
             const ivStr = `${iv.atkIV} / ${iv.defIV} / ${iv.staIV}`;
             const rank = index + start + 1;
             return (
-              <BodyRow 
-                key={ivStr} 
+              <BodyRow
+                key={ivStr}
                 $highlight={rank === currRank ? 'var(--color-purple-faded)' : 'transparent'}
                 $fontWeight={rank === currRank ? 'bold' : 'normal'}
               >
@@ -155,9 +180,16 @@ function IVTable({ list40, list41, list50, list51 }) {
           })}
         </TableBody>
       </Table>
-    </>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  overflow-x: auto;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+`
 
 const Configurations = styled.form`
   display: flex;
@@ -192,7 +224,7 @@ const IVInput = styled.input`
 
 const RankInput = styled.input`
   width: 50px;
-  color: ${props => props.color};
+  color: ${props => props.$valid ? 'green' : 'red'};
   font-weight: bold;
 `
 
@@ -205,23 +237,50 @@ const Table = styled.table`
   margin: 10px;
   border-spacing: 0;
   width: 620px;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    width: 550px;
+  }
 `
 
 const TableHeader = styled.thead`
-
   & tr {
     border-spacing: 4px;
+  }
+
+  @media ${QUERIES.tabletAndSmaller} {
+    font-size: 1rem;
+
+    & tr {
+      border-spacing: 2px;
+    }
   }
 `
 
 const TableBody = styled.tbody`
   font-size: 0.8rem;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    font-size: 0.7rem;
+  }
 `
 
 const HeaderElement = styled.th`
   font-weight: 600;
   min-width: 55px;
   max-width: 90px;
+  border-bottom: 1px solid black;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    min-width: 40px;
+    max-width: 70px;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+
+  &:first-of-type, &:nth-of-type(4), &:nth-of-type(7) {
+    border-right: 1px solid black;
+  }
 `
 
 const TableRow = styled.tr`
@@ -229,7 +288,6 @@ const TableRow = styled.tr`
 `
 
 const HeaderRow = styled(TableRow)`
-
 `
 
 const BodyRow = styled(TableRow)`
@@ -242,8 +300,12 @@ const BodyRow = styled(TableRow)`
 `
 
 const BodyElement = styled.td`
-  padding: 0 2px;
+  padding: 0 4px;
   margin: 0;
+
+  &:first-of-type, &:nth-of-type(4), &:nth-of-type(7) {
+    border-right: 1px solid black;
+  }
 `
 
 export default IVTable;

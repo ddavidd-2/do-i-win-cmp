@@ -26,6 +26,7 @@ const GlobalStyle = createGlobalStyle`
     --color-purple-light: hsl(252deg, 30%, 75%);
     --color-purple-faded: hsl(252deg, 30%, 75%, 0.55);
     --color-header-shadow: hsl(252deg, 30%, 40%, 0.65);
+    --color-header: var(--color-purple-faded);
 
     --color-white-faded: hsl(0deg, 0%, 95%, 0.9);
 

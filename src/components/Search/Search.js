@@ -3,12 +3,15 @@ import React from 'react';
 import { styled } from 'styled-components';
 import pokedex from '../../../public/pokedex.json';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 /* todo: focus trap */
 
 function Search() {
-
+  const router = useRouter();
   const [searchInput, setSearchInput] = React.useState('');
+
+  const searchResults = pokedex.filter((p) => p.pokemon_name.startsWith(searchInput));
 
   function handleSearch(event) {
     const input = event.target.value;
@@ -18,6 +21,10 @@ function Search() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    if (searchResults.length > 0) {
+      const { pokemon_name, form } = searchResults[0];
+      router.push(`/ranking/${pokemon_name}/${form}`);
+    }
   }
 
   return (
@@ -36,7 +43,7 @@ function Search() {
       </Form>
       {searchInput &&
        <SearchResults>
-          {pokedex.filter((p) => p.pokemon_name.startsWith(searchInput)).slice(0, 10)
+          {searchResults.slice(0, 10)
             .map((pkm) => {
               let display = pkm.pokemon_name;
               if (pkm.form !== "Normal") {

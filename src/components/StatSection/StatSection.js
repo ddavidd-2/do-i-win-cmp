@@ -12,7 +12,7 @@ function StatSection({ pokemon, stats, setStats, entry }) {
   React.useEffect(() => {
     const calcStats = getBestLevel(base_attack, atkIV, base_defense, defIV, base_stamina, staIV, multipliers);
     setStats(calcStats);
-  }, [base_attack, base_defense, base_stamina, atkIV, defIV, staIV, multipliers, setStats])
+  }, [base_attack, base_defense, base_stamina, atkIV, defIV, staIV, setStats])
 
   return (
     <Stats>
