@@ -2,8 +2,11 @@
 import { QUERIES } from '@/constants';
 import React from 'react';
 import { styled } from 'styled-components';
+import { getIVs } from '@/utils/pokeMath';
 
-function IVTable({ list40, list41, list50, list51 }) {
+function IVTable({ name, form }) {
+
+  const [list40, list41, list50, list51] = React.useMemo(() => getIVs(name, form), [name, form]);
 
   const [start, setStart] = React.useState(0);
   const [end, setEnd] = React.useState(30);
@@ -136,10 +139,6 @@ function IVTable({ list40, list41, list50, list51 }) {
               $valid={isValidRank(rankInput)}
             />
           </Setting>
-          <input
-            type="reset"
-            value="Reset"
-          />
         </Searching>
       </Configurations>
       <Table>
@@ -185,10 +184,11 @@ function IVTable({ list40, list41, list50, list51 }) {
 }
 
 const Wrapper = styled.div`
-  overflow-x: auto;
-  max-width: 100%;
+  width: min(100%, 620px);
+  
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 `
 
 const Configurations = styled.form`
@@ -237,6 +237,7 @@ const Table = styled.table`
   margin: 10px;
   border-spacing: 0;
   width: 620px;
+  overflow-x: scroll;
 
   @media ${QUERIES.tabletAndSmaller} {
     width: 550px;
