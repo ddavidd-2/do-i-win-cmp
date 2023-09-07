@@ -1,6 +1,6 @@
 import PokemonWrapper from "@/components/PokemonWrapper"
 import BoldWrap from "@/components/BoldWrap"
-import getPokedex from "@/utils/getPokedex";
+import pokedex from "../../public/pokedex.json"
 
 export const metadata = {
   title: 'Do I Win CMP?',
@@ -9,7 +9,6 @@ export const metadata = {
 
 
 export default async function Home() {
-  const pokedex = await getPokedex();
 
   return (
     <>
