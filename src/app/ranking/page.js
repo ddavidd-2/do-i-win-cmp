@@ -1,7 +1,6 @@
 import Search from "@/components/Search";
 import getPokedex from "@/utils/getPokedex";
 
-
 export default async function Page() {
   const pokedex = await getPokedex();
 

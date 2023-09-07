@@ -1,5 +1,6 @@
 import Link from "next/link";
 import IVTable from "@/components/IVTable";
+import getPokedex from "@/utils/getPokedex";
 
 export async function generateStaticParams() {
   const pokedex = await getPokedex();
@@ -11,14 +12,9 @@ export async function generateStaticParams() {
   }));
 }
 
-async function getPokedex() {
-  const res = await fetch('http://localhost:3000/api/pokedex');
-  const data = await res.json();
-  return data.pkm;
-}
 
 async function getIVs(id) {
-  const res = await fetch(`http://localhost:3000/api/ivs?id=${id}`, { cache: 'no-store' });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/ivs?id=${id}`, { cache: 'no-store' });
   if (res.status !== 200) {
     console.error(res.message);
   }
