@@ -9,15 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@libsql/client": "^0.3.2",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.10",
-    "next": "^13.4.12",
+    "next": "^13.4.19",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-feather": "^2.0.10",
     "styled-components": "^6.0.5"
   },
   "devDependencies": {
-    "babel-plugin-styled-components": "^2.1.4"
+    "babel-plugin-styled-components": "^2.1.4",
+    "encoding": "^0.1.13"
   }
 }

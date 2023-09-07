@@ -9,7 +9,7 @@ import FormSelector from '../FormSelector';
 import TypeIcon from '../TypeIcon';
 import IVInput from '../IVInput';
 
-function PokeCard({ pokemon, dispatch, stats, setStats }) {
+function PokeCard({ pokemon, dispatch, stats, setStats, pokedex }) {
 
   const [isPokemonChosen, setIsPokemonChosen] = React.useState(false);
   const [pokedexEntry, setPokedexEntry] = React.useState({});
@@ -63,6 +63,7 @@ function PokeCard({ pokemon, dispatch, stats, setStats }) {
           handleName={handleName}
           setPokedexEntry={setPokedexEntry}
           setBestIVs={setBestIVs}
+          pokedex={pokedex}
         />
         {isPokemonChosen &&
         <FormSelect>
@@ -76,6 +77,7 @@ function PokeCard({ pokemon, dispatch, stats, setStats }) {
             formHandler={handleForm}
             setPokedexEntry={setPokedexEntry}
             setBestIVs={setBestIVs}
+            pokedex={pokedex}
           />
         </FormSelect>
         }

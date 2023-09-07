@@ -1,17 +1,29 @@
 'use client';
 import React from 'react';
 import { styled } from 'styled-components';
-import pokedex from '../../../public/pokedex.json';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-/* todo: focus trap */
+const defaultPdx = [
+  {
+    id: 1,
+    name: 'Bulbasaur',
+    form: 'Normal',
+    pokedex_id: 1,
+  },
+  {
+    id: 2,
+    name: 'Ivysaur',
+    form: 'Normal',
+    pokedex_id: 2,
+  }
+]
 
-function Search() {
+function Search({ pokedex=defaultPdx }) {
   const router = useRouter();
   const [searchInput, setSearchInput] = React.useState('');
 
-  const searchResults = pokedex.filter((p) => p.pokemon_name.startsWith(searchInput));
+  const searchResults = pokedex.filter((p) => p.name.startsWith(searchInput));
 
   function handleSearch(event) {
     const input = event.target.value;
@@ -20,10 +32,11 @@ function Search() {
   }
 
   function handleSubmit(event) {
-    event.preventDefault();
     if (searchResults.length > 0) {
-      const { pokemon_name, form } = searchResults[0];
-      router.push(`/ranking/${pokemon_name}/${form}`);
+      const { id, pokemon_name, form } = searchResults[0];
+      router.push(`/ranking/${id}/${pokemon_name}/${form}`);
+    } else {
+      event.preventDefault();
     }
   }
 
@@ -45,16 +58,16 @@ function Search() {
        <SearchResults>
           {searchResults.slice(0, 10)
             .map((pkm) => {
-              let display = pkm.pokemon_name;
+              let display = pkm.name;
               if (pkm.form !== "Normal") {
                 display += ` (${pkm.form})`;
               }
-              const label = `#${pkm.pokemon_id} ${display}`
+              const label = `#${pkm.pokedex_id} ${display}`
 
               return (
                 <Result
                   key={display}
-                  href={`/ranking/${pkm.pokemon_name}/${pkm.form}`}
+                  href={`/ranking/${pkm.id}/${pkm.name}/${pkm.form}`}
                 >
                   {label}  
                 </Result>

@@ -5,7 +5,7 @@ import PokeCard from '../PokeCard';
 import usePokemon from '@/hooks/usePokemon';
 import CMPWinner from '../CMPWinner';
 
-function PokemonWrapper() {
+function PokemonWrapper({ pokedex }) {
 
   const [pokemonOne, dispatchOne] = usePokemon();
   const [statsOne, setStatsOne] = React.useState({});
@@ -22,12 +22,14 @@ function PokemonWrapper() {
           dispatch={dispatchOne}
           stats={statsOne}
           setStats={setStatsOne}
+          pokedex={pokedex}
         />
         <PokeCard
           pokemon={pokemonTwo}
           dispatch={dispatchTwo}
           stats={statsTwo}
           setStats={setStatsTwo}
+          pokedex={pokedex}
         />
       </CardLayout>
       {(!!statsOne.atk && !!statsTwo.atk) &&
