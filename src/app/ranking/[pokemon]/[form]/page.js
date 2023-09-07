@@ -1,4 +1,3 @@
-import Link from "next/link";
 import path from 'path';
 import { promises as fs } from 'fs';
 import IVList from "@/components/IVTable";
@@ -18,14 +17,9 @@ export default async function Page({ params }) {
   const form = params.form;
 
   return (
-    <div>
-      <Link href="/ranking">Back to Home</Link>
-      <p>{name}</p>
-      <p>form: {form}</p>
-      <IVList
-        name={name}
-        form={form}
-      />
-    </div>
+    <IVList
+      name={name}
+      form={form}
+    />
   )
 }

@@ -11,7 +11,7 @@ function ContentWrapper({ children }) {
 }
 
 const Wrapper = styled.div`
-  max-width: 680px;
+  width: 680px;
   width: fit-content;
   padding: 0 60px;
   margin: 20px;
@@ -25,10 +25,12 @@ const Wrapper = styled.div`
   align-items: center;
 
   @media ${QUERIES.phoneAndSmaller} {
-    max-width: min(360px, 95%);
+    width: 95%;
     margin-top: 0;
     border-radius: 0;
     height: 100%;
+    margin: 0;
+    padding: 0 8px;
   }
 `;
 

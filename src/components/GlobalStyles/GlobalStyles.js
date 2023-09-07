@@ -37,6 +37,8 @@ const GlobalStyle = createGlobalStyle`
     --color-loss: hsl(0deg, 65%, 50%);
     --color-tie: var(--color-gray-80);
 
+    --color-win-hover: hsl(115deg, 100%, 55%);
+
     /* spacing */
     --header-height: 48px;
 

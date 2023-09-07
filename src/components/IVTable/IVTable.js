@@ -3,6 +3,7 @@ import { QUERIES } from '@/constants';
 import React from 'react';
 import { styled } from 'styled-components';
 import { getIVs } from '@/utils/pokeMath';
+import Link from 'next/link';
 
 function IVTable({ name, form }) {
 
@@ -21,7 +22,7 @@ function IVTable({ name, form }) {
     :
     useBestBuddy ? list41 : list40;
 
-  const topSP = rankings[0].stat_product;
+  const topSP = rankings[0].sp;
 
   function getRelativeSP(sp) {
     const relPercent = sp / topSP * 100
@@ -72,7 +73,7 @@ function IVTable({ name, form }) {
       const def = Number(ivs[1]);
       const sta = Number(ivs[2]);
 
-      const rank = rankings.findIndex((pkm) => pkm.atk_iv === atk && pkm.def_iv === def && pkm.sta_iv === sta) + 1;
+      const rank = rankings.findIndex((pkm) => pkm.atkIV === atk && pkm.defIV === def && pkm.staIV === sta) + 1;
       updateRank(rank);
     }
   }
@@ -84,6 +85,9 @@ function IVTable({ name, form }) {
 
   return (
     <Wrapper>
+      <Link href="/ranking">Back to Search</Link>
+      <Title>{name}</Title>
+      <Title>Form: {form}</Title>
       <Configurations>
         <Toggles>
           <Setting>
@@ -139,55 +143,63 @@ function IVTable({ name, form }) {
               $valid={isValidRank(rankInput)}
             />
           </Setting>
+          <input
+            type="reset"
+            value="Reset"
+          />
         </Searching>
       </Configurations>
-      <Table>
-        <TableHeader>
-          <HeaderRow>
-            <HeaderElement>Rank</HeaderElement>
-            <HeaderElement>IV</HeaderElement>
-            <HeaderElement>CP</HeaderElement>
-            <HeaderElement>Level</HeaderElement>
-            <HeaderElement>Atk</HeaderElement>
-            <HeaderElement>Def</HeaderElement>
-            <HeaderElement>HP</HeaderElement>
-            <HeaderElement>Total Stat</HeaderElement>
-            <HeaderElement>Rel. Stat</HeaderElement>
-          </HeaderRow>
-        </TableHeader>
-        <TableBody>
-          {rankings.slice(start, end).map((pkm) => {
-            const ivStr = `${pkm.atk_iv} / ${pkm.def_iv} / ${pkm.sta_iv}`;
-            return (
-              <BodyRow
-                key={ivStr}
-                $highlight={pkm.ranking === currRank ? 'var(--color-purple-faded)' : 'transparent'}
-                $fontWeight={pkm.ranking === currRank ? 'bold' : 'normal'}
-              >
-                <BodyElement>{pkm.ranking}</BodyElement>
-                <BodyElement>{ivStr}</BodyElement>
-                <BodyElement>{pkm.cp}</BodyElement>
-                <BodyElement>{pkm.lvl}</BodyElement>
-                <BodyElement>{pkm.attack}</BodyElement>
-                <BodyElement>{pkm.defense}</BodyElement>
-                <BodyElement>{pkm.stamina}</BodyElement>
-                <BodyElement>{pkm.stat_product}</BodyElement>
-                <BodyElement>{getRelativeSP(pkm.stat_product)}%</BodyElement>
-              </BodyRow>
-            )
-          })}
-        </TableBody>
-      </Table>
+      <TableWrapper>
+        <Table>
+          <TableHeader>
+            <HeaderRow>
+              <HeaderElement>Rank</HeaderElement>
+              <HeaderElement>IV</HeaderElement>
+              <HeaderElement>CP</HeaderElement>
+              <HeaderElement>Level</HeaderElement>
+              <HeaderElement>Atk</HeaderElement>
+              <HeaderElement>Def</HeaderElement>
+              <HeaderElement>HP</HeaderElement>
+              <HeaderElement>Total Stat</HeaderElement>
+              <HeaderElement>Rel. Stat</HeaderElement>
+            </HeaderRow>
+          </TableHeader>
+          <TableBody>
+            {rankings.slice(start, end).map((iv, index) => {
+              const ivStr = `${iv.atkIV} / ${iv.defIV} / ${iv.staIV}`;
+              const rank = index + start + 1;
+              return (
+                <BodyRow
+                  key={ivStr}
+                  $highlight={rank === currRank ? 'var(--color-purple-faded)' : 'transparent'}
+                  $fontWeight={rank === currRank ? 'bold' : 'normal'}
+                >
+                  <BodyElement>{rank}</BodyElement>
+                  <BodyElement>{ivStr}</BodyElement>
+                  <BodyElement>{iv.cp}</BodyElement>
+                  <BodyElement>{iv.level}</BodyElement>
+                  <BodyElement>{iv.atk}</BodyElement>
+                  <BodyElement>{iv.def}</BodyElement>
+                  <BodyElement>{iv.sta}</BodyElement>
+                  <BodyElement>{iv.sp}</BodyElement>
+                  <BodyElement>{getRelativeSP(iv.sp)}%</BodyElement>
+                </BodyRow>
+              )
+            })}
+          </TableBody>
+        </Table>
+      </TableWrapper>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
-  width: min(100%, 620px);
-  
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    width: 100%;
+  }
 `
 
 const Configurations = styled.form`
@@ -195,20 +207,33 @@ const Configurations = styled.form`
   flex-direction: column;
   justify-content: center;
   gap: 8px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   width: 400px;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    width: 100%;
+    max-width: 400px;
+  }
 `
 
 const Toggles = styled.div`
   display: flex;
   justify-content: space-around;
   font-size: var(--font-small);
+
+  @media ${QUERIES.phoneAndSmaller} {
+    justify-content: center;
+    gap: 8px;
+  }
 `
 
 const Searching = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between;;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    font-size: 0.9rem;
+  }
 `
 
 const Checkbox = styled.input`
@@ -219,6 +244,7 @@ const Checkbox = styled.input`
 const IVInput = styled.input`
   width: 60px;
   font-weight: bold;
+
 `
 
 const RankInput = styled.input`
@@ -232,11 +258,16 @@ const Setting = styled.div`
   gap: 4px;
 `
 
+const TableWrapper = styled.div`
+  width: 100%;
+  overflow: auto;
+  white-space: nowrap;
+`
+
 const Table = styled.table`
   margin: 10px;
   border-spacing: 0;
   width: 620px;
-  overflow-x: scroll;
 
   @media ${QUERIES.tabletAndSmaller} {
     width: 550px;
@@ -306,6 +337,10 @@ const BodyElement = styled.td`
   &:first-of-type, &:nth-of-type(4), &:nth-of-type(7) {
     border-right: 1px solid black;
   }
+`
+
+const Title = styled.div`
+  margin: 4px 0;
 `
 
 export default IVTable;
