@@ -1,12 +1,15 @@
 import PokemonWrapper from "@/components/PokemonWrapper"
 import BoldWrap from "@/components/BoldWrap"
+import getPokedex from "@/utils/getPokedex";
 
 export const metadata = {
   title: 'Do I Win CMP?',
   description: 'A Pokémon Go CMP Tie Calculator',
 }
 
+
 export default async function Home() {
+  const pokedex = await getPokedex();
 
   return (
     <>

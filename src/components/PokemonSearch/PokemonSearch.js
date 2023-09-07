@@ -1,10 +1,9 @@
 'use client';
 import React from 'react';
 import { styled } from 'styled-components';
-import pokedex from '../../../public/pokedex';
 import { QUERIES } from '@/constants';
 
-function PokemonSearch({ pokemon, handleName, setPokedexEntry, setBestIVs }) {
+function PokemonSearch({ pokemon, handleName, setPokedexEntry, setBestIVs, pokedex }) {
 
   const [search, setSearch] = React.useState('');
 

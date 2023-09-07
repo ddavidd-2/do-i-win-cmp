@@ -18,7 +18,7 @@ function IVTable({ list40, list41, list50, list51 }) {
     :
     useBestBuddy ? list41 : list40;
 
-  const topSP = rankings[0].sp;
+  const topSP = rankings[0].stat_product;
 
   function getRelativeSP(sp) {
     const relPercent = sp / topSP * 100
@@ -69,7 +69,7 @@ function IVTable({ list40, list41, list50, list51 }) {
       const def = Number(ivs[1]);
       const sta = Number(ivs[2]);
 
-      const rank = rankings.findIndex((pkm) => pkm.atkIV === atk && pkm.defIV === def && pkm.staIV === sta) + 1;
+      const rank = rankings.findIndex((pkm) => pkm.atk_iv === atk && pkm.def_iv === def && pkm.sta_iv === sta) + 1;
       updateRank(rank);
     }
   }
@@ -157,24 +157,23 @@ function IVTable({ list40, list41, list50, list51 }) {
           </HeaderRow>
         </TableHeader>
         <TableBody>
-          {rankings.slice(start, end).map((iv, index) => {
-            const ivStr = `${iv.atkIV} / ${iv.defIV} / ${iv.staIV}`;
-            const rank = index + start + 1;
+          {rankings.slice(start, end).map((pkm) => {
+            const ivStr = `${pkm.atk_iv} / ${pkm.def_iv} / ${pkm.sta_iv}`;
             return (
               <BodyRow
                 key={ivStr}
-                $highlight={rank === currRank ? 'var(--color-purple-faded)' : 'transparent'}
-                $fontWeight={rank === currRank ? 'bold' : 'normal'}
+                $highlight={pkm.ranking === currRank ? 'var(--color-purple-faded)' : 'transparent'}
+                $fontWeight={pkm.ranking === currRank ? 'bold' : 'normal'}
               >
-                <BodyElement>{rank}</BodyElement>
+                <BodyElement>{pkm.ranking}</BodyElement>
                 <BodyElement>{ivStr}</BodyElement>
-                <BodyElement>{iv.cp}</BodyElement>
-                <BodyElement>{iv.level}</BodyElement>
-                <BodyElement>{iv.atk}</BodyElement>
-                <BodyElement>{iv.def}</BodyElement>
-                <BodyElement>{iv.sta}</BodyElement>
-                <BodyElement>{iv.sp}</BodyElement>
-                <BodyElement>{getRelativeSP(iv.sp)}%</BodyElement>
+                <BodyElement>{pkm.cp}</BodyElement>
+                <BodyElement>{pkm.lvl}</BodyElement>
+                <BodyElement>{pkm.attack}</BodyElement>
+                <BodyElement>{pkm.defense}</BodyElement>
+                <BodyElement>{pkm.stamina}</BodyElement>
+                <BodyElement>{pkm.stat_product}</BodyElement>
+                <BodyElement>{getRelativeSP(pkm.stat_product)}%</BodyElement>
               </BodyRow>
             )
           })}

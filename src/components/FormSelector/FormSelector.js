@@ -1,10 +1,9 @@
 'use client';
 import React from 'react';
 import { styled } from 'styled-components';
-import pokedex from '../../../public/pokedex';
 import { QUERIES } from '@/constants';
 
-function FormSelector({ pokemon, formHandler, setPokedexEntry, setBestIVs }) {
+function FormSelector({ pokemon, formHandler, setPokedexEntry, setBestIVs, pokedex }) {
 
   function handleSelect(event) {
     formHandler(event);
