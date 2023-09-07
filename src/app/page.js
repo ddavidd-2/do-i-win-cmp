@@ -21,7 +21,9 @@ export default async function Home() {
         <p>CMP occurs when both player use their Charge Move on the same turn.
           The game calculates each Pok&#233;mon&apos;s attack stat to determine which Charge Move gets priority and goes first.</p>
       </details>
-      <PokemonWrapper />
+      <PokemonWrapper 
+        pokedex={pokedex}
+      />
     </>
   )
 }
