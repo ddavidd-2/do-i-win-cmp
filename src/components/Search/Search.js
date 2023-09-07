@@ -4,26 +4,11 @@ import { styled } from 'styled-components';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-const defaultPdx = [
-  {
-    id: 1,
-    name: 'Bulbasaur',
-    form: 'Normal',
-    pokedex_id: 1,
-  },
-  {
-    id: 2,
-    name: 'Ivysaur',
-    form: 'Normal',
-    pokedex_id: 2,
-  }
-]
-
-function Search({ pokedex=defaultPdx }) {
+function Search({ pokedex }) {
   const router = useRouter();
   const [searchInput, setSearchInput] = React.useState('');
 
-  const searchResults = pokedex.filter((p) => p.name.startsWith(searchInput));
+  const searchResults = pokedex.filter((p) => p.pokemon_name.startsWith(searchInput));
 
   function handleSearch(event) {
     const input = event.target.value;
@@ -32,11 +17,10 @@ function Search({ pokedex=defaultPdx }) {
   }
 
   function handleSubmit(event) {
-    if (searchResults.length > 0) {
-      const { id, pokemon_name, form } = searchResults[0];
-      router.push(`/ranking/${id}/${pokemon_name}/${form}`);
-    } else {
       event.preventDefault();
+    if (searchResults.length > 0) {
+      const { pokemon_name, form } = searchResults[0];
+      router.push(`/ranking/${pokemon_name}/${form}`);
     }
   }
 
@@ -45,7 +29,7 @@ function Search({ pokedex=defaultPdx }) {
       <Form onSubmit={handleSubmit}>
         <SearchBar
           type="text"
-          placeholder="Search by Name / No."
+          placeholder="Search by Name"
           value={searchInput}
           onChange={handleSearch}
         />
@@ -58,16 +42,16 @@ function Search({ pokedex=defaultPdx }) {
        <SearchResults>
           {searchResults.slice(0, 10)
             .map((pkm) => {
-              let display = pkm.name;
+              let display = pkm.pokemon_name;
               if (pkm.form !== "Normal") {
                 display += ` (${pkm.form})`;
               }
-              const label = `#${pkm.pokedex_id} ${display}`
+              const label = `#${pkm.pokemon_id} ${display}`
 
               return (
                 <Result
                   key={display}
-                  href={`/ranking/${pkm.id}/${pkm.name}/${pkm.form}`}
+                  href={`/ranking/${pkm.pokemon_name}/${pkm.form}`}
                 >
                   {label}  
                 </Result>
@@ -94,6 +78,10 @@ const SearchButton = styled.input`
   padding: 3px;
   background-color: var(--color-win);
   border: 1px solid black;
+  
+  &:hover {
+    background-color: var(--color-win-hover);
+  }
 `
 
 const SearchBar = styled.input`

@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@libsql/client": "^0.3.2",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.10",
     "next": "^13.4.19",

@@ -26,14 +26,18 @@ const GlobalStyle = createGlobalStyle`
     --color-purple-light: hsl(252deg, 30%, 75%);
     --color-purple-faded: hsl(252deg, 30%, 75%, 0.55);
     --color-header-shadow: hsl(252deg, 30%, 40%, 0.65);
-    --color-header: var(--color-purple-faded);
-
     --color-white-faded: hsl(0deg, 0%, 95%, 0.9);
+
+    --color-header: var(--color-purple-faded);
+    --backdrop: hsl(0deg, 0%, 8%, 0.64);
+
 
     /* cmp result colors */
     --color-win: hsl(115deg, 100%, 42%);
     --color-loss: hsl(0deg, 65%, 50%);
     --color-tie: var(--color-gray-80);
+
+    --color-win-hover: hsl(115deg, 100%, 55%);
 
     /* spacing */
     --header-height: 48px;

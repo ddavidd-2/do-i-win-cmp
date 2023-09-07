@@ -79,3 +79,11 @@ function calcCP(level, atkBase, atkIV, defBase, defIV, staBase, staIV, cpMultipl
   const mult = cpMultipliers[level];
   return Math.floor(atk * Math.pow(def, 0.5) * Math.pow(sta, 0.5) * Math.pow(mult, 2) / 10);
 }
+
+export function getIVs(name, form) {
+  const list40 = getPokemonIVs(name, form, 40);
+  const list41 = getPokemonIVs(name, form, 41);
+  const list50 = getPokemonIVs(name, form, 50);
+  const list51 = getPokemonIVs(name, form, 51);
+  return [list40, list41, list50, list51];
+}
