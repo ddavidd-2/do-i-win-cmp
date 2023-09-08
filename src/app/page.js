@@ -12,6 +12,7 @@ export default async function Home() {
 
   return (
     <>
+      <link rel="icon" href="/icon.png" sizes="any" />
       <h3>A Pok&#233;mon GO CMP Calculator</h3>
       <p><BoldWrap>Do I Win CMP?</BoldWrap> is an Pok&#233;mon GO calculator that 
         determines who your Pok&#233;mon wins and loses against in terms of Charge Move Priority.</p>
