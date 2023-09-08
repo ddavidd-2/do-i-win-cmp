@@ -78,9 +78,10 @@ const NavLink = styled(Link)`
   color: inherit;
   font-size: 1.2rem;
   margin-bottom: 4px;
+  font-weight: bold;
 
   &:hover, &:focus {
-
+    color: white; 
   }
 
 `

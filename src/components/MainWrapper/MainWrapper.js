@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   overflow: auto;
 
   @media ${QUERIES.phoneAndSmaller} {
-    background-color: var(--color-purple-faded);
+    background-color: var(--color-header);
   }
 `;
 

@@ -11,7 +11,7 @@ function ContentWrapper({ children }) {
 }
 
 const Wrapper = styled.div`
-  width: 680px;
+  max-width: 680px;
   width: fit-content;
   padding: 0 60px;
   margin: 20px;
