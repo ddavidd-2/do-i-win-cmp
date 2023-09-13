@@ -5,7 +5,7 @@ const pokedex = require('../../public/pokedex.json');
 export function getPokemonIVs(name, form, maxLevel = 51) {
   const pokemon = pokedex.find(p => p.pokemon_name === name && p.form === form);
   if (!pokemon) {
-    return []
+    throw new Error(`Pokemon: ${name}, form: ${form} is not a valid pokemon`);
   }
   return calculateAllIVs(pokemon, cpm, maxLevel);
 }
