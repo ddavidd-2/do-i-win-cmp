@@ -1,8 +1,9 @@
 import path from 'path';
 import { promises as fs } from 'fs';
 import IVTable from "@/components/IVTable";
-import { getIVs } from '@/utils/pokeMath';
+import { getIVs, validPokemon } from '@/utils/pokeMath';
 import getFormName from '@/utils/pokemonFormName';
+import notFound from './notFound';
 
 export async function generateMetadata({ params }) {
   const name = params.pokemon;
@@ -28,20 +29,21 @@ export async function generateStaticParams() {
 export default async function Page({ params }) {
   const name = params.pokemon;
   const form = params.form;
-  try {
-    const [list40, list41, list50, list51] = getIVs(name, form);
 
-    return (
-      <IVTable
-        name={name}
-        form={form}
-        list40={list40}
-        list41={list41}
-        list50={list50}
-        list51={list51}
-      />
-    )
-  } catch (e) {
-    throw new Error(e);
+  if (!validPokemon(name, form)) {
+    return notFound(name, form);
   }
+
+  const [list40, list41, list50, list51] = getIVs(name, form);
+
+  return (
+    <IVTable
+      name={name}
+      form={form}
+      list40={list40}
+      list41={list41}
+      list50={list50}
+      list51={list51}
+    />
+  )
 }

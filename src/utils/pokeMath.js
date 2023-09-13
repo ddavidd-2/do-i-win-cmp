@@ -5,10 +5,11 @@ const pokedex = require('../../public/pokedex.json');
 export function getPokemonIVs(name, form, maxLevel = 51) {
   const pokemon = pokedex.find(p => p.pokemon_name === name && p.form === form);
   if (!pokemon) {
-    throw new Error(`Pokemon: ${name}, form: ${form} is not a valid pokemon`);
+    return [];
   }
   return calculateAllIVs(pokemon, cpm, maxLevel);
 }
+
 
 export function calculateAllIVs(pkm, cpMultipliers, maxLevel = 51) {
   const MAX_IV = 15;
@@ -86,4 +87,8 @@ export function getIVs(name, form) {
   const list50 = getPokemonIVs(name, form, 50);
   const list51 = getPokemonIVs(name, form, 51);
   return [list40, list41, list50, list51];
+}
+
+export function validPokemon(name, form) {
+  return pokedex.some((pkm) => pkm.pokemon_name === name && pkm.form === form);  
 }
