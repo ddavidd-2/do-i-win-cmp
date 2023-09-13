@@ -2,12 +2,13 @@
 import { QUERIES } from '@/constants';
 import React from 'react';
 import { styled } from 'styled-components';
-import { getIVs } from '@/utils/pokeMath';
 import Link from 'next/link';
+import getFormName from '@/utils/pokemonFormName';
+import { ArrowLeft } from 'react-feather';
+import TypeIcon from '../TypeIcon';
+import pokedex from '../../../public/pokedex.json';
 
-function IVTable({ name, form }) {
-
-  const [list40, list41, list50, list51] = React.useMemo(() => getIVs(name, form), [name, form]);
+function IVTable({ name, form, list40, list41, list50, list51 }) {
 
   const [start, setStart] = React.useState(0);
   const [end, setEnd] = React.useState(30);
@@ -16,6 +17,8 @@ function IVTable({ name, form }) {
   const [currRank, setCurrRank] = React.useState(0);
   const [rankInput, setRankInput] = React.useState("");
   const [ivInput, setIvInput] = React.useState("");
+
+  const entry = pokedex.find((p) => p.pokemon_name === name && p.form === form);
 
   let rankings = useXL ?
     useBestBuddy ? list51 : list50
@@ -85,9 +88,16 @@ function IVTable({ name, form }) {
 
   return (
     <Wrapper>
-      <Link href="/ranking">Back to Search</Link>
-      <Title>{name}</Title>
-      <Title>Form: {form}</Title>
+      <span>
+        <ArrowLeft size={12} />
+        <Home href="/ranking">Back to IV Rankings</Home>
+      </span>
+      <Title>{getFormName(name, form)}</Title>
+      <Types>
+        {entry.type.map(t => {
+          return <TypeIcon key={t} type={t} />
+        })}
+      </Types>
       <Configurations>
         <Toggles>
           <Setting>
@@ -199,6 +209,19 @@ const Wrapper = styled.div`
 
   @media ${QUERIES.phoneAndSmaller} {
     width: 100%;
+  }
+`
+
+const Home = styled(Link)`
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: underline;
   }
 `
 
@@ -341,6 +364,15 @@ const BodyElement = styled.td`
 
 const Title = styled.div`
   margin: 4px 0;
+  font-size: var(--font-large);
+  font-weight: bold;
+`
+
+const Types = styled.div`
+  display: flex;
+  padding-bottom: 8px;
+  justify-content: center;
+  gap: 2px;
 `
 
 export default IVTable;

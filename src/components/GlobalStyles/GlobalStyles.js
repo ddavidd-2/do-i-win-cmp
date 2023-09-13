@@ -28,9 +28,6 @@ const GlobalStyle = createGlobalStyle`
     --color-header-shadow: hsl(252deg, 30%, 40%, 0.65);
     --color-white-faded: hsl(0deg, 0%, 95%, 0.9);
 
-    --color-header: var(--color-purple-faded);
-    --backdrop: hsl(0deg, 0%, 8%, 0.64);
-
 
     /* cmp result colors */
     --color-win: hsl(115deg, 100%, 42%);
@@ -45,11 +42,11 @@ const GlobalStyle = createGlobalStyle`
     /* main */
     --color-primary: var(--color-purple-light);
     --color-secondary: var(--color-primary-white);
-    /*
-    @media (prefers-color-scheme: dark) {
-      --color-primary: var(--color-purple-dark);
-      --color-secondary: black;
-    } */
+
+    --color-header: var(--color-purple-light);
+    --backdrop: hsl(0deg, 0%, 8%, 0.64);
+    --color-island: hsl(277deg, 34%, 87%, 0.64);
+
 
     background-color: var(--color-background);
     font-weight: 400;

@@ -17,10 +17,7 @@ const Wrapper = styled.div`
   height: 100%;
   padding-top: var(--header-height);
   overflow: auto;
-
-  @media ${QUERIES.phoneAndSmaller} {
-    background-color: var(--color-header);
-  }
+  background-color: var(--color-primary);
 `;
 
 export default MainWrapper;

@@ -55,10 +55,6 @@ const Title = styled.div`
   margin: auto;
   height: 30px;
   width: fit-content;
-
-  @media ${QUERIES.phoneAndSmaller} {
-
-  }
 `
 
 const NavBar = styled.nav`
@@ -82,6 +78,10 @@ const NavLink = styled(Link)`
 
   &:hover, &:focus {
     color: white; 
+  }
+
+  @media ${QUERIES.tabletAndSmaller} {
+    font-size: 1.1rem;
   }
 
 `

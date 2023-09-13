@@ -16,21 +16,20 @@ const Wrapper = styled.div`
   padding: 0 60px;
   margin: 20px;
   margin-bottom: 0;
-  border-radius: 8px;
-  background-color: var(--color-purple-faded);
   min-height: 650px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: var(--color-island);
+  border-radius: 10px;
 
   @media ${QUERIES.phoneAndSmaller} {
     width: 95%;
-    margin-top: 0;
     border-radius: 0;
     height: 100%;
-    margin: 0;
     padding: 0 8px;
+    background-color: transparent;
   }
 `;
 
