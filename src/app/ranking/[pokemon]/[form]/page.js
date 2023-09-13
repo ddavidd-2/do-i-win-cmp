@@ -28,16 +28,20 @@ export async function generateStaticParams() {
 export default async function Page({ params }) {
   const name = params.pokemon;
   const form = params.form;
-  const [list40, list41, list50, list51] = getIVs(name, form);
+  try {
+    const [list40, list41, list50, list51] = getIVs(name, form);
 
-  return (
-    <IVTable
-      name={name}
-      form={form}
-      list40={list40}
-      list41={list41}
-      list50={list50}
-      list51={list51}
-    />
-  )
+    return (
+      <IVTable
+        name={name}
+        form={form}
+        list40={list40}
+        list41={list41}
+        list50={list50}
+        list51={list51}
+      />
+    )
+  } catch (e) {
+    throw new Error(e);
+  }
 }

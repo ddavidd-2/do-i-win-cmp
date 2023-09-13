@@ -12,7 +12,7 @@ function Search({ pokedex }) {
 
   function handleSearch(event) {
     const input = event.target.value;
-    const searchValue = input.charAt(0).toUpperCase() + input.slice(1);
+    const searchValue = input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
     setSearchInput(searchValue);
   }
 
